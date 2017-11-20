@@ -107,13 +107,13 @@ namespace ChinookSystem.BLL
                 //        }
                 //}
 
-                //using an inline if
+                //using an inline if to replace above switch
                 results = from x in context.Tracks
                           orderby x.Name
                           where tracksby.Equals("Artist") ? x.Album.ArtistId == argid :
-                          tracksby.Equals("MediaType") ? x.MediaTypeId == argid :
-                          tracksby.Equals("Genre") ? x.GenreId == argid :
-                          x.AlbumId == argid
+                                tracksby.Equals("MediaType") ? x.MediaTypeId == argid :
+                                tracksby.Equals("Genre") ? x.GenreId == argid :
+                                x.AlbumId == argid
                           select new TrackList
                           {
                               TrackID = x.TrackId,
@@ -133,6 +133,26 @@ namespace ChinookSystem.BLL
             }
         }//eom
 
-       
+        [DataObjectMethod(DataObjectMethodType.Select,false)]
+        public List<GenreAlbumReport> GenreAlbumReport_Get()
+        {
+            using (var context = new ChinookContext())
+            {
+                var results = from x in context.Tracks
+                              select new GenreAlbumReport
+                              {
+                                  GenreName = x.Genre.Name,
+                                  AlbumTitle = x.Album.Title,
+                                  TrackName = x.Name,
+                                  Milliseconds = x.Milliseconds,
+                                  Bytes = x.Bytes,
+                                  UnitPrice = x.UnitPrice
+                              };
+                return results.ToList();
+            }
+        }
+
     }//eoc
+
+   
 }
