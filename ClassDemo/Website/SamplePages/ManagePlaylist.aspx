@@ -152,6 +152,7 @@
 
         </asp:ListView>
         <br /><br />
+        <%-- Fetch lookup controls --%>
         <asp:Label ID="Label6" runat="server" Text="Playlist Name:"></asp:Label>
         <asp:TextBox ID="PlaylistName" runat="server"></asp:TextBox>
         <asp:Button ID="PlayListFetch" runat="server" Text="Fetch" 
@@ -172,6 +173,8 @@
                  style="color:red"></span>
         </asp:LinkButton>
         <br /><br />
+
+         <%--Display of the current tracks on the  playlist--%>
         <asp:GridView ID="PlayList" runat="server" AutoGenerateColumns="False"
              Caption="PlayList" GridLines="Horizontal" BorderStyle="None">
             <Columns>
